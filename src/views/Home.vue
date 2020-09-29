@@ -1,12 +1,15 @@
 <template>
 <div class="home">
-    <h1>サブスク管理</h1>
+    <SubscriptionCard />
 </div>
 </template>
 
 <script>
+import SubscriptionCard from "@/components/SubscriptionCard";
 export default {
     name: 'Home',
-    components: {}
+    components: {
+        SubscriptionCard
+    }
 }
 </script>

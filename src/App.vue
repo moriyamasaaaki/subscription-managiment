@@ -4,23 +4,22 @@
         <div class="d-flex align-center">
             <h1>サブスク管理</h1>
         </div>
-
         <v-spacer></v-spacer>
     </v-app-bar>
-
-    <v-main>
-        <SubscriptionCard />
-    </v-main>
+    <SideMenu />
+    <v-content>
+        <router-view></router-view>
+    </v-content>
 </v-app>
 </template>
 
 <script>
-import SubscriptionCard from "@/components/SubscriptionCard";
+import SideMenu from "@/components/SideMenu";
 export default {
     name: 'App',
 
     components: {
-        SubscriptionCard
+        SideMenu
     },
 
     data: () => ({
@@ -28,3 +27,12 @@ export default {
     }),
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+</style>
