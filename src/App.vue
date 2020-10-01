@@ -1,15 +1,19 @@
 <template>
 <v-app>
-    <v-app-bar app color="primary" dark>
-        <v-toolbar-title>サブスク管理</v-toolbar-title>
+    <v-app-bar app>
+        <v-app-bar-nav-icon @click.stop="toggleSideMenu" v-show="$store.state.login_user"></v-app-bar-nav-icon>
+        <v-toolbar-title class="headline text-uppercase">
+            <span>サブスク管理</span>
+        </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-toolbar-items>
-            <v-btn text @click="logout">ログアウト</v-btn>
+        <v-toolbar-items v-if="$store.state.login_user">
+            <v-btn @click="logout">ログアウト</v-btn>
         </v-toolbar-items>
     </v-app-bar>
     <SideMenu />
+
     <v-content>
-        <router-view></router-view>
+        <router-view />
     </v-content>
 </v-app>
 </template>
@@ -44,12 +48,3 @@ export default {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 40px;
-}
-</style>
