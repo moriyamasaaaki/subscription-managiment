@@ -4,7 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 Vue.config.productionTip = false
 
@@ -20,7 +20,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 new Vue({
   router,
