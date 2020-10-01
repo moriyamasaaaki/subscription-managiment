@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     login_user: null,
+    drawer: false,
   },
   mutations: {
     setLoginUser(state, user) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     deleteLoginUser(state) {
       state.login_user = null;
+    },
+    toggleSideMenu(state) {
+      state.drawer = !state.drawer;
     },
   },
   actions: {
@@ -30,6 +34,13 @@ export default new Vuex.Store({
     deleteLoginUser({ commit }) {
       commit("deleteLoginUser");
     },
+    toggleSideMenu({ commit }) {
+      commit("toggleSideMenu");
+    },
+  },
+  getters: {
+    userName: state => state.login_user ? state.login_user.displayName : '',
+    photoURL: state => state.login_user ? state.login_user.photoURL : ''
   },
   modules: {},
 });
