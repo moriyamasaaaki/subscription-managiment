@@ -1,10 +1,11 @@
 <template>
 <v-app>
     <v-app-bar app color="primary" dark>
-        <div class="d-flex align-center">
-            <h1>サブスク管理</h1>
-        </div>
+        <v-toolbar-title>サブスク管理</v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-toolbar-items>
+            <v-btn text @click="logout">ログアウト</v-btn>
+        </v-toolbar-items>
     </v-app-bar>
     <SideMenu />
     <v-content>
@@ -29,6 +30,8 @@ export default {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setLoginUser(user)
+            } else {
+                this.deleteLoginUser()
             }
         })
     },
@@ -37,7 +40,7 @@ export default {
         //
     }),
     methods: {
-        ...mapActions(['setLoginUser'])
+        ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser'])
     }
 };
 </script>
