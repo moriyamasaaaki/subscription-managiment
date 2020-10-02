@@ -22,6 +22,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/MyList.vue"),
   },
+  {
+    path: "/create/subscription",
+    name: "CreateSubscription",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CreateSubscription.vue"),
+  },
 ];
 
 const router = new VueRouter({

@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     login_user: null,
     drawer: false,
+    subscriptions: [],
   },
   mutations: {
     setLoginUser(state, user) {
@@ -18,6 +19,10 @@ export default new Vuex.Store({
     },
     toggleSideMenu(state) {
       state.drawer = !state.drawer;
+    },
+    addSubscription(state, { id, subscription }) {
+      subscription.id = id;
+      state.subscriptions.push(subscription);
     },
   },
   actions: {
@@ -37,10 +42,22 @@ export default new Vuex.Store({
     toggleSideMenu({ commit }) {
       commit("toggleSideMenu");
     },
+    addSubscription({ getters, commit }, subscription) {
+      if (getters.uid) {
+        firebase
+          .firestore()
+          .collection(`users/${getters.uid}/subscriptions`)
+          .add(subscription)
+          .then((doc) => {
+            commit("addSubscription", { id: doc.id, subscription });
+          });
+      }
+    },
   },
   getters: {
-    userName: state => state.login_user ? state.login_user.displayName : '',
-    photoURL: state => state.login_user ? state.login_user.photoURL : ''
+    userName: (state) => (state.login_user ? state.login_user.displayName : ""),
+    photoURL: (state) => (state.login_user ? state.login_user.photoURL : ""),
+    uid: (state) => (state.login_user ? state.login_user.uid : null)
   },
   modules: {},
 });

@@ -10,14 +10,19 @@
             <v-btn color='info' @click="login">Googleアカウントでログイン</v-btn>
         </v-flex>
     </v-layout>
+    <SubscriptionCard />
 </v-container>
 </template>
 
 <script>
+import SubscriptionCard from '@/components/SubscriptionCard';
 import {
     mapActions
 } from 'vuex'
 export default {
+    components: {
+        SubscriptionCard
+    },
     methods: {
         ...mapActions(['login'])
     }
