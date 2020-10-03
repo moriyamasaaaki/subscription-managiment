@@ -5,24 +5,26 @@
             <h1>サブスク作成</h1>
         </v-flex>
 
-        <v-flex xs mt-5>
+        <v-flex xs10 mt-5>
             <v-card>
                 <v-card-text>
                     <v-form>
                         <v-text-field v-model="subscription.name" label="サブスク名"></v-text-field>
+                        <v-text-field v-model="subscription.fee" label="料金"></v-text-field>
                         <v-text-field v-model="subscription.description" label="概要"></v-text-field>
                         <v-text-field v-model="subscription.memo" label="メモ"></v-text-field>
                         <v-select :items="months" v-model="subscription.month" label="登録月"></v-select>
                         <v-select :items="days" v-model="subscription.day" label="登録日"></v-select>
+
                         <v-container fluid>
-                            <p>サブスク種類</p>
+                            <p>プラン</p>
                             <v-radio-group v-model="subscription.type" :mandatory="false">
                                 <v-radio label="月額" value="月額"></v-radio>
                                 <v-radio label="年額" value="年額"></v-radio>
                             </v-radio-group>
                         </v-container>
-                        <v-btn>キャンセル</v-btn>
-                        <v-btn color="info" @click="submit">保存</v-btn>
+                        <v-btn @click="$router.push({ name: 'subscriptions' })">キャンセル</v-btn>
+                        <v-btn color="info" @click="submit">作成</v-btn>
                     </v-form>
                 </v-card-text>
             </v-card>
@@ -34,7 +36,7 @@
 <script>
 import {
     mapActions
-} from 'vuex';
+} from 'vuex'
 export default {
     data() {
         return {
@@ -45,10 +47,13 @@ export default {
     },
     methods: {
         submit() {
-            this.addSubscription(this.subscription);
-            console.log(this.subscription);
+            this.addSubscription(this.subscription)
+            this.$router.push({
+                name: 'subscriptions'
+            })
+            this.subscription = {}
         },
         ...mapActions(['addSubscription'])
-    },
+    }
 }
 </script>

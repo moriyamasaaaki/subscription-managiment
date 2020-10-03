@@ -28,6 +28,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/CreateSubscription.vue"),
   },
+  {
+    path: "/subscriptions",
+    name: "subscriptions",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Subscriptions.vue"),
+  },
 ];
 
 const router = new VueRouter({
