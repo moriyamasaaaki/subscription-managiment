@@ -32,9 +32,9 @@ export default {
     data: () => ({
         valid: true,
         name: "",
-        nameRules: [
+        descriptionRules: [
             (v) => !!v || "必須項目です",
-            (v) => (v && v.length <= 100) || "Name must be less than 100 characters",
+            (v) => (v && v.length <= 100) || "Description must be less than 300 characters",
         ],
         select: null,
         items: ["1", "2", "3", "4"],

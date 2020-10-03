@@ -14,16 +14,17 @@
 
     <v-list class="pt-0" dense>
         <v-divider></v-divider>
+        <router-link v-for="item in items" :key="item.title" :to="item.link">
+            <v-list-item>
+                <v-list-item-icon>
+                    <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
 
-        <v-list-item v-for="item in items" :key="item.title" :to='item.link'>
-            <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-        </v-list-item>
+                <v-list-item-content>
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+        </router-link>
     </v-list>
 </v-navigation-drawer>
 </template>
@@ -38,16 +39,12 @@ export default {
             items: [{
                     title: 'ホーム',
                     icon: 'home',
-                    link: {
-                        name: '/'
-                    }
+                    link: '/'
                 },
                 {
-                    title: '連絡先一覧',
+                    title: 'サブスク一覧',
                     icon: 'list',
-                    link: {
-                        name: 'About'
-                    }
+                    link: '/subscriptions'
                 }
             ]
         }

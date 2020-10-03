@@ -34,8 +34,15 @@ export default {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setLoginUser(user)
+                this.fetchSubscriptions()
+                if (this.$router.currentRoute.name === 'home') this.$router.push({
+                    name: 'subscriptions'
+                })
             } else {
                 this.deleteLoginUser()
+                this.$router.push({
+                    name: 'home'
+                })
             }
         })
     },
@@ -44,7 +51,7 @@ export default {
         //
     }),
     methods: {
-        ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser'])
+        ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser', 'fetchSubscriptions'])
     }
 };
 </script>
