@@ -14,9 +14,16 @@
                     <td class="text-xs-left">{{ props.item.type }}</td>
                     <td class="text-xs-left">{{ props.item.month }}月{{ props.item.day }}日サブスク開始</td>
                     <td class="text-xs-left">{{ props.item.fee | number_format}}</td>
+                    <td class="text-xs-left">{{ props.item.url }}</td>
                 </template>
             </v-data-table>
         </v-flex>
+        <p>月/合計1,0000円</p>
+        <v-btn class="mx-2 btn" fab dark color="indigo" to="/create/subscription">
+            <v-icon dark>
+                mdi-plus
+            </v-icon>
+        </v-btn>
     </v-layout>
 </v-container>
 </template>
@@ -57,9 +64,13 @@ export default {
                     value: 'fee'
                 },
                 {
-                    text: '操作',
-                    sortable: false
-                }
+                    text: 'URL',
+                    value: 'url'
+                },
+                // {
+                //     text: '操作',
+                //     sortable: false
+                // }
             ],
             subscriptions: []
         }
@@ -70,5 +81,11 @@ export default {
 <style lang="scss" scoped>
 a {
     text-decoration: none;
+}
+
+.btn {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
 }
 </style>
