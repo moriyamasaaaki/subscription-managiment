@@ -13,6 +13,7 @@
                         <v-text-field v-model="subscription.fee" label="料金"></v-text-field>
                         <v-text-field v-model="subscription.description" label="概要"></v-text-field>
                         <v-text-field v-model="subscription.memo" label="メモ"></v-text-field>
+                        <v-text-field v-model="subscription.url" label="サイトURL"></v-text-field>
                         <v-select :items="months" v-model="subscription.month" label="登録月"></v-select>
                         <v-select :items="days" v-model="subscription.day" label="登録日"></v-select>
 
