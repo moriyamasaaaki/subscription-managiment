@@ -45,7 +45,17 @@ export default {
                     title: 'サブスク一覧',
                     icon: 'list',
                     link: '/subscriptions'
-                }
+                },
+                {
+                    title: '利用規約',
+                    icon: 'list',
+                    link: '/terms'
+                },
+                {
+                    title: 'プライバシーポリシー',
+                    icon: 'list',
+                    link: '/privacy'
+                },
             ]
         }
     },

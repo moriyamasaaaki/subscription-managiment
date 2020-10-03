@@ -34,6 +34,18 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Subscriptions.vue"),
   },
+  {
+    path: "/terms",
+    name: "TermsOfService",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/TermsOfService.vue"),
+  },
+  {
+    path: "/privacy",
+    name: "Privacy",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Privacy.vue"),
+  },
 ];
 
 const router = new VueRouter({
