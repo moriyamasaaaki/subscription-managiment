@@ -1,8 +1,8 @@
 <template>
-<v-container text-xs-center justify-center>
+<v-container class="subscriptions" text-xs-center justify-center>
     <v-layout row wrap>
         <v-flex xs12>
-            <h1>サブスク一覧</h1>
+            <h1 class="hdg">登録サブスク</h1>
         </v-flex>
 
         <v-flex xs12 mt-3 justify-center>
@@ -79,6 +79,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.subscriptions {
+    margin: 16px auto;
+    padding: 0 8px;
+}
+
 a {
     text-decoration: none;
 }
