@@ -38,22 +38,22 @@ export default {
         return {
             items: [{
                     title: 'ホーム',
-                    icon: 'home',
+                    icon: 'mdi-home',
                     link: '/'
                 },
                 {
                     title: 'サブスク一覧',
-                    icon: 'list',
+                    icon: 'mdi-format-list-bulleted',
                     link: '/subscriptions'
                 },
                 {
                     title: '利用規約',
-                    icon: 'list',
+                    icon: 'mdi-book-check',
                     link: '/terms'
                 },
                 {
                     title: 'プライバシーポリシー',
-                    icon: 'list',
+                    icon: 'mdi-fingerprint',
                     link: '/privacy'
                 },
             ]
@@ -64,3 +64,9 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+a {
+    text-decoration: none;
+}
+</style>
