@@ -23,15 +23,6 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-Vue.filter("number_format", function(value) {
-  if (!value.match(/^\d+$/)) {
-    return value;
-  }
-  let formatter = new Intl.NumberFormat("ja-JP");
-  return formatter.format(value);
-});
-
-
 new Vue({
   router,
   store,
