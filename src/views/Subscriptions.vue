@@ -14,11 +14,13 @@
                     <td class="text-xs-left">{{ props.item.type }}</td>
                     <td class="text-xs-left">{{ props.item.month }}月{{ props.item.day }}日サブスク開始</td>
                     <td class="text-xs-left">{{ props.item.fee | number_format}}</td>
-                    <td class="text-xs-left">{{ props.item.url }}</td>
                 </template>
             </v-data-table>
         </v-flex>
-        <p>月/合計1,0000円</p>
+        <ul>
+            <li class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</li>
+            <li class="subscriptions__sum-fee">年額/合計: <span>¥{{ year | addComma }}</span>円</li>
+        </ul>
         <v-btn class="mx-2 btn" fab dark color="indigo" to="/create/subscription">
             <v-icon dark>
                 mdi-plus
@@ -31,7 +33,7 @@
 <script>
 export default {
     created() {
-        this.subscriptions = this.$store.state.subscriptions
+        this.subscriptions = this.$store.state.subscriptions;
     },
     data() {
         return {
@@ -63,16 +65,44 @@ export default {
                     text: '料金',
                     value: 'fee'
                 },
-                {
-                    text: 'URL',
-                    value: 'url'
-                },
+                // {
+                //     text: 'URL',
+                //     value: 'url'
+                // },
                 // {
                 //     text: '操作',
                 //     sortable: false
                 // }
             ],
-            subscriptions: []
+            subscriptions: [],
+            fees: [],
+            sumSubscription: ''
+        }
+    },
+    computed: {
+        sum: function () {
+            this.subscriptionsFee();
+            return this.fees.reduce(function (prev, current) {
+                return prev + current;
+            }, 0)
+        },
+        year: function () {
+            return this.fees.reduce(function (prev, current) {
+                return prev + current * 12;
+            }, 0)
+        },
+    },
+    methods: {
+        subscriptionsFee() {
+            this.subscriptions.map(subscription => {
+                this.fees.push(subscription.fee);
+                console.log(this.fees);
+            })
+        },
+    },
+    filters: {
+        addComma: function (val) {
+            return val.toLocaleString();
         }
     }
 }
@@ -82,6 +112,19 @@ export default {
 .subscriptions {
     margin: 16px auto;
     padding: 0 8px;
+
+    ul {
+        margin: 32px 0 0 auto;
+    }
+
+    li {
+        margin-bottom: 8px;
+        font-size: 18px;
+    }
+
+    &__sum-fee {
+        border-bottom: 1px solid rgb(226, 224, 224);
+    }
 }
 
 a {
@@ -92,5 +135,9 @@ a {
     position: fixed;
     bottom: 2%;
     right: 2%;
+}
+
+span {
+    color: orangered;
 }
 </style>
