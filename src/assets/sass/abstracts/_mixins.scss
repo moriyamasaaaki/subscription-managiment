@@ -15,7 +15,7 @@ $pclarg: 1440px;
   }
 }
 
-@mixin pclarg {
+@mixin pclarge {
   @media (min-width: ($pclarg)) {
     @content;
   }
