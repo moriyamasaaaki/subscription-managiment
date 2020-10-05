@@ -4,19 +4,28 @@
         <v-flex xs12>
             <h1 class="hdg">登録サブスク</h1>
         </v-flex>
-
-        <v-flex xs12 mt-3 justify-center>
-            <v-data-table :headers='headers' :items='subscriptions'>
-                <template v-slot:items="props">
-                    <td class="text-xs-left">{{ props.item.name }}</td>
-                    <td class="text-xs-left">{{ props.item.description }}</td>
-                    <td class="text-xs-left">{{ props.item.memo }}</td>
-                    <td class="text-xs-left">{{ props.item.type }}</td>
-                    <td class="text-xs-left">{{ props.item.month }}月{{ props.item.day }}日サブスク開始</td>
-                    <td class="text-xs-left">{{ props.item.fee | number_format}}</td>
-                </template>
-            </v-data-table>
-        </v-flex>
+        <v-expansion-panels>
+            <v-expansion-panel v-for="subscription in subscriptions" :key="subscription.id">
+                <v-expansion-panel-header>
+                    <div class="subscriptions__header-left">
+                        <img :src="'http://www.google.com/s2/favicons?domain=' + subscription.url" width="30" height="30" alt="" />
+                        <p>{{ subscription.name }}</p>
+                    </div>
+                    <div class="subscriptions__header-right">
+                        <p>{{ subscription.type.slice(0, 1) }}/¥{{ subscription.fee | addComma}}円</p>
+                        <p>支払日:毎月{{ subscription.day }}日</p>
+                    </div>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                    <p>{{ subscription.memo }}</p>
+                    <a :href="subscription.url">
+                        <v-btn depressed color="primary">
+                            サイトへ
+                        </v-btn>
+                    </a>
+                </v-expansion-panel-content>
+            </v-expansion-panel>
+        </v-expansion-panels>
         <ul>
             <li class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</li>
             <li class="subscriptions__sum-fee">年額/合計: <span>¥{{ year | addComma }}</span>円</li>
@@ -125,10 +134,20 @@ export default {
     &__sum-fee {
         border-bottom: 1px solid rgb(226, 224, 224);
     }
+
+    // &__header {
+    //     display: flex;
+    //     align-items: center;
+    // }
 }
 
 a {
     text-decoration: none;
+}
+
+img {
+    display: block;
+    margin-bottom: 8px;
 }
 
 .btn {
