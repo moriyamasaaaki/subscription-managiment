@@ -22,6 +22,7 @@
                             <v-radio-group v-model="subscription.type" :mandatory="false">
                                 <v-radio label="月額" value="月額"></v-radio>
                                 <v-radio label="年額" value="年額"></v-radio>
+                                <v-radio label="お試し期間" value="お試し期間"></v-radio>
                             </v-radio-group>
                         </v-container>
                         <v-btn @click="$router.push({ name: 'subscriptions' })">キャンセル</v-btn>
