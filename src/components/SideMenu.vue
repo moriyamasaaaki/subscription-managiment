@@ -56,6 +56,11 @@ export default {
                     icon: 'mdi-fingerprint',
                     link: '/privacy'
                 },
+                {
+                    title: '使い方',
+                    icon: 'mdi-application-settings',
+                    link: '/usage'
+                },
             ]
         }
     },
