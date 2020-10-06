@@ -4,7 +4,10 @@
         <v-flex xs12>
             <h1 class="hdg">登録サブスク</h1>
         </v-flex>
-        <div class="subscriptions__container">
+        <div class="subscriptions__loading" v-show="loading">
+            <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+        </div>
+        <div class="subscriptions__container" v-show="!loading">
             <v-expansion-panels class="subscriptions__list">
                 <v-expansion-panel v-for="subscription in subscriptions" :key="subscription.id">
                     <v-expansion-panel-header>
@@ -88,10 +91,14 @@ import {
 
 export default {
     created() {
-        this.subscriptions = this.$store.state.subscriptions;
+        setTimeout(() => {
+            this.loading = false;
+            this.subscriptions = this.$store.state.subscriptions;
+        }, 1500)
     },
     data() {
         return {
+            loading: true,
             headers: [{
                     text: 'サブスク名',
                     value: 'name'
@@ -185,6 +192,10 @@ export default {
             align-items: flex-start;
             width: 100%;
         }
+    }
+
+    &__loading {
+        margin: 80px auto 0;
     }
 
     &__list {
