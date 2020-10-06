@@ -35,6 +35,12 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Subscriptions.vue"),
   },
   {
+    path: "/subscriptions/:subscription_id?/edit",
+    name: "subscription_edit",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/CreateSubscription.vue"),
+  },
+  {
     path: "/terms",
     name: "TermsOfService",
     component: () =>

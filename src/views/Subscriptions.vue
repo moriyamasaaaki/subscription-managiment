@@ -24,6 +24,11 @@
                                 <v-icon>mdi-credit-card-outline</v-icon>
                                 <p>支払日:毎月{{ subscription.day }}日</p>
                             </div>
+                            <span>
+                                <router-link :to="{ name: 'subscription_edit', params: { subscription_id: subscription.id }}">
+                                    <v-icon small class="mr-2">edit</v-icon>
+                                </router-link>
+                            </span>
                         </div>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>
