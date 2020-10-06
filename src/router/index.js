@@ -14,43 +14,49 @@ const routes = [
     path: "/about",
     name: "About",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      import("../views/About.vue"),
   },
   {
     path: "/myList",
     name: "MyList",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/MyList.vue"),
+      import("../views/MyList.vue"),
   },
   {
     path: "/create/subscription",
     name: "CreateSubscription",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CreateSubscription.vue"),
+      import("../views/CreateSubscription.vue"),
   },
   {
     path: "/subscriptions",
     name: "subscriptions",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Subscriptions.vue"),
+      import("../views/Subscriptions.vue"),
   },
   {
     path: "/subscriptions/:subscription_id?/edit",
     name: "subscription_edit",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CreateSubscription.vue"),
+      import("../views/CreateSubscription.vue"),
   },
   {
     path: "/terms",
     name: "TermsOfService",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/TermsOfService.vue"),
+      import("../views/TermsOfService.vue"),
   },
   {
     path: "/privacy",
     name: "Privacy",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Privacy.vue"),
+      import("../views/Privacy.vue"),
+  },
+  {
+    path: "/usage",
+    name: "Usage",
+    component: () =>
+      import("../views/Usage.vue"),
   },
 ];
 
