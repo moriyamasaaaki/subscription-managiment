@@ -24,11 +24,6 @@
                                 <v-icon>mdi-credit-card-outline</v-icon>
                                 <p>支払日:毎月{{ subscription.day }}日</p>
                             </div>
-                            <span>
-                                <router-link :to="{ name: 'subscription_edit', params: { subscription_id: subscription.id }}">
-                                    <v-icon small class="mr-2">edit</v-icon>
-                                </router-link>
-                            </span>
                         </div>
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>
@@ -36,22 +31,38 @@
                             <p>{{ subscription.memo }}</p>
                             <p v-if="subscription.memo === ''">特になし</p>
                         </div>
-                        <a :href="subscription.url" v-if="subscription.url">
-                            <v-btn depressed color="primary">
-                                サイトへ
-                            </v-btn>
-                        </a>
+                        <div class="subscriptions__footer">
+                            <a :href="subscription.url" v-if="subscription.url">
+                                <v-btn depressed color="primary">
+                                    サイトへ
+                                </v-btn>
+                            </a>
+                            <div class="subscriptions__footer-buttons">
+                                <v-btn class="ma-1" :to="{ name: 'subscription_edit', params: { subscription_id: subscription.id }}" outlined small fab color="indigo">
+                                    <v-icon>mdi-pencil</v-icon>
+                                </v-btn>
+                                <v-btn class="ma-1" @click="deleteConfirm(subscription.id)" outlined small fab color="error">
+                                    <v-icon>mdi-delete</v-icon>
+                                </v-btn>
+                            </div>
+                        </div>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-expansion-panels>
 
             <v-card class="subscriptions__sum-fees">
+                <v-list-item class="grow">
+                    <v-list-item-avatar color="grey darken-3">
+                        <v-img class="elevation-6" v-if="photoURL" :src="photoURL" />
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ userName }}</v-list-item-title>
+                    </v-list-item-content>
+
+                </v-list-item>
                 <v-list-item three-line>
                     <v-list-item-content>
-                        <v-list-item-title class="headline mb-1">
-                            合計金額
-                        </v-list-item-title>
-                        <v-card-text class="subscriptions__sum-fee" v-if="subscriptions">{{ subscriptions.length }}つのサブスクに登録しています。</v-card-text>
+                        <v-card-text class="subscriptions__length" v-if="subscriptions">現在{{ subscriptions.length }}個のサブスクに登録しています。</v-card-text>
                         <v-card-text class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</v-card-text>
                         <v-card-text class="subscriptions__sum-fee">年額/合計: <span>¥{{ year | addComma }}</span>円</v-card-text>
                     </v-list-item-content>
@@ -68,6 +79,13 @@
 </template>
 
 <script>
+import {
+    mapActions
+} from 'vuex'
+import {
+    mapGetters
+} from 'vuex'
+
 export default {
     created() {
         this.subscriptions = this.$store.state.subscriptions;
@@ -128,6 +146,7 @@ export default {
                 return prev + current * 12;
             }, 0)
         },
+        ...mapGetters(['userName', 'photoURL'])
     },
     methods: {
         subscriptionsFee() {
@@ -136,6 +155,14 @@ export default {
                 console.log(this.fees);
             })
         },
+        deleteConfirm(id) {
+            if (confirm('削除してよろしいですか？')) {
+                this.deleteSubscription({
+                    id
+                })
+            }
+        },
+        ...mapActions(['deleteSubscription'])
     },
     filters: {
         addComma: function (val) {
@@ -195,7 +222,14 @@ export default {
     &__content {
         font-size: 13px;
         color: rgba(0, 0, 0, .6);
+    }
 
+    &__header-left {
+        width: 40%;
+    }
+
+    &__header-right {
+        width: 30%;
     }
 
     &__header-payment {
@@ -210,6 +244,16 @@ export default {
 
     &__content {
         margin: 16px 0;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__length {
+        font-size: 13px;
     }
 
 }
