@@ -31,6 +31,14 @@ export default new Vuex.Store({
 
       state.subscriptions[index] = subscription;
     },
+
+    deleteSubscription(state, { id }) {
+      const index = state.subscriptions.findIndex(
+        (subscription) => subscription.id === id
+      );
+
+      state.subscriptions.splice(index, 1);
+    },
   },
   actions: {
     setLoginUser({ commit }, user) {
@@ -80,6 +88,18 @@ export default new Vuex.Store({
           .update(subscription)
           .then(() => {
             commit("updateSubscription", { id, subscription });
+          });
+      }
+    },
+    deleteSubscription({ getters, commit }, { id }) {
+      if (getters.uid) {
+        firebase
+          .firestore()
+          .collection(`users/${getters.uid}/subscriptions`)
+          .doc(id)
+          .delete()
+          .then(() => {
+            commit("deleteSubscription", { id });
           });
       }
     },

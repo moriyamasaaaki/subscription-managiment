@@ -31,10 +31,7 @@
                             !subscription.fee ||
                             !subscription.month ||
                             !subscription.day ||
-                            !subscription.type ||
-                            subscription.name.length > 20 ||
-                            subscription.description.length > 50 ||
-                            subscription.memo.length > 100
+                            !subscription.type 
                         " @click="submit">作成</v-btn>
                     </v-form>
                 </v-card-text>
@@ -49,6 +46,18 @@ import {
     mapActions
 } from 'vuex'
 export default {
+    created() {
+        if (!this.$route.params.subscription_id) return
+
+        const subscription = this.$store.getters.getSubscriptionById(this.$route.params.subscription_id)
+        if (subscription) {
+            this.subscription = subscription
+        } else {
+            this.$router.push({
+                name: 'subscriptions'
+            })
+        }
+    },
     data() {
         return {
             months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -65,13 +74,20 @@ export default {
     },
     methods: {
         submit() {
-            this.addSubscription(this.subscription)
+            if (this.$route.params.subscription_id) {
+                this.updateSubscription({
+                    id: this.$route.params.subscription_id,
+                    subscription: this.subscription
+                })
+            } else {
+                this.addSubscription(this.subscription)
+            }
             this.$router.push({
                 name: 'subscriptions'
             })
             this.subscription = {}
         },
-        ...mapActions(['addSubscription'])
+        ...mapActions(['addSubscription', 'updateSubscription'])
     }
 }
 </script>
