@@ -67,7 +67,6 @@
 .privacy {
     max-width: 1000px;
     margin: 40px auto;
-    line-height: 2.5;
 
     li {
         font-size: 16px;

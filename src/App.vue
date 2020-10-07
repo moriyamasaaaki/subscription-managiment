@@ -2,15 +2,13 @@
 <v-app>
     <v-app-bar app color="primary">
         <v-app-bar-nav-icon @click.stop="toggleSideMenu" v-show="$store.state.login_user"></v-app-bar-nav-icon>
-        <v-toolbar-title class="headline text-uppercase">
+        <v-toolbar-title class="headline">
             <router-link to="/subscriptions">
-                <span>サブスク管理</span>
+                <span>Subscment</span>
             </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-toolbar-items v-if="$store.state.login_user">
-            <v-btn color="secondary" @click="logout">ログアウト</v-btn>
-        </v-toolbar-items>
+        <v-btn class="pa-5" v-if="$store.state.login_user" @click="logout">Sign out</v-btn>
     </v-app-bar>
     <SideMenu />
 
@@ -43,7 +41,7 @@ export default {
             } else {
                 this.deleteLoginUser()
                 this.$router.push({
-                    name: 'home'
+                    name: 'Home'
                 })
             }
         })
@@ -67,5 +65,6 @@ a {
 span {
     display: block;
     color: white;
+    font-size: 24px;
 }
 </style>
