@@ -266,7 +266,6 @@
 .terms {
     max-width: 1000px;
     margin: 16px auto;
-    line-height: 2.5;
     padding: 0 8px;
 
     @include pc {
