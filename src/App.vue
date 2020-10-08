@@ -15,12 +15,14 @@
     <v-content>
         <router-view />
     </v-content>
+    <Footer />
 </v-app>
 </template>
 
 <script>
 import firebase from 'firebase';
 import SideMenu from "@/components/SideMenu";
+import Footer from "@/components/Footer";
 import {
     mapActions
 } from 'vuex';
@@ -28,7 +30,8 @@ export default {
     name: 'App',
 
     components: {
-        SideMenu
+        SideMenu,
+        Footer
     },
     created() {
         firebase.auth().onAuthStateChanged(user => {
