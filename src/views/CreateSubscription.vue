@@ -2,7 +2,7 @@
 <v-container text-xs-center>
     <v-layout row wrap justify-center>
         <v-flex xs12>
-            <h1>サブスク作成</h1>
+            <h1 class="hdg">サブスク作成</h1>
         </v-flex>
 
         <v-flex xs10 mt-5>

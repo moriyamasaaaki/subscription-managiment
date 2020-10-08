@@ -1,8 +1,9 @@
 <template>
 <v-container class="home" text-xs-center justify-center>
     <v-layout row wrap>
+        <h1>サブスク管理とは？</h1>
+
         <v-flex xs12>
-            <h1 class="hdg">サブスク管理とは？</h1>
             <div class="home__top">
                 <img src="@/assets/image/main.png" alt="">
                 <div class="home__top-login-button">
@@ -15,6 +16,8 @@
                 </div>
             </div>
         </v-flex>
+        <h3>サブスク管理大変...</h3>
+
         <v-row>
             <v-col cols=12 md=6 lg=4>
                 <v-card class="card ma-2" color="rgb(2, 62, 112)" dark>
@@ -135,5 +138,73 @@ img {
         margin-bottom: 16px;
     }
 
+}
+
+h1 {
+    position: relative;
+    margin: 64px 0 24px;
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    background: #2c79ec;
+    color: #fff;
+}
+
+h3 {
+    position: relative;
+    margin-bottom: 2em;
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    background: #2c79ec;
+    color: #fff;
+    margin: 0 0 0 auto;
+}
+
+h1,
+h3 {
+    font-size: 18px;
+    margin-bottom: 24px;
+
+    @include pc {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+}
+
+h1:before,
+h1:after,
+h3:before,
+h3:after {
+    position: absolute;
+    content: '';
+    border-radius: 50%;
+    background: #2c79ec;
+}
+
+h1:before {
+    right: 30px;
+    bottom: -15px;
+    width: 30px;
+    height: 30px;
+}
+
+h3:before {
+    left: 30px;
+    bottom: -15px;
+    width: 30px;
+    height: 30px;
+}
+
+h1:after {
+    right: 20px;
+    bottom: -30px;
+    width: 15px;
+    height: 15px;
+}
+
+h3:after {
+    left: 20px;
+    bottom: -30px;
+    width: 15px;
+    height: 15px;
 }
 </style>
