@@ -1,11 +1,9 @@
 <template>
 <v-container text-xs-center>
     <v-layout row wrap justify-center>
-        <v-flex xs12>
-            <h1 class="hdg">サブスク作成</h1>
-        </v-flex>
+        <Title :title="'サブスク作成'" />
 
-        <v-flex xs10 mt-5>
+        <v-flex xs12 mt-5>
             <v-card>
                 <v-card-text>
                     <v-form ref="form">
@@ -42,10 +40,14 @@
 </template>
 
 <script>
+import Title from "@/components/Title";
 import {
     mapActions
 } from 'vuex'
 export default {
+    components: {
+        Title
+    },
     created() {
         if (!this.$route.params.subscription_id) return
 

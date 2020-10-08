@@ -1,9 +1,7 @@
 <template>
 <v-container class="subscriptions" text-xs-center justify-center>
     <v-layout row wrap>
-        <v-flex xs12>
-            <h1 class="hdg">登録サブスク</h1>
-        </v-flex>
+        <Title :title="'登録サブスク'" />
         <div class="subscriptions__loading" v-show="loading">
             <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
         </div>
@@ -100,6 +98,7 @@
 </template>
 
 <script>
+import Title from "@/components/Title";
 import {
     mapActions
 } from 'vuex'
@@ -108,6 +107,9 @@ import {
 } from 'vuex'
 
 export default {
+    components: {
+        Title
+    },
     created() {
         setTimeout(() => {
             this.loading = false;
@@ -273,10 +275,6 @@ export default {
         font-size: 13px;
     }
 
-}
-
-a {
-    text-decoration: none;
 }
 
 img {
