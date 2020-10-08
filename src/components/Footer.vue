@@ -7,7 +7,6 @@
 <style lang="scss" scoped>
 .footer {
     border-top: 1px solid #cfdce6;
-    margin: 120px 0 0;
 
     &__copyright {
         display: block;

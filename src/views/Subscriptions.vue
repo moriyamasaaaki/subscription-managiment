@@ -277,10 +277,6 @@ export default {
 
 }
 
-a {
-    text-decoration: none;
-}
-
 img {
     display: block;
     margin-bottom: 8px;

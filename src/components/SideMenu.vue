@@ -72,7 +72,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a {
-    text-decoration: none;
-}
 </style>

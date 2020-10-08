@@ -19,40 +19,15 @@
         <h3>サブスク管理大変...</h3>
 
         <v-row>
-            <v-col cols=12 md=6 lg=4>
+            <v-col cols=12 md=6 lg=4 v-for="card in cards" :key="card.title">
                 <v-card class="card ma-2" color="rgb(2, 62, 112)" dark>
-                    <v-img height="300px" src="@/assets/image/subsc-img1.png" />
+                    <v-img height="300px" :src="card.img" />
                     <div class="card__body">
 
                         <v-card-title class="card__body-title headline">
-                            1,サブスク管理ができない
+                            {{ card.title }}
                         </v-card-title>
-                        <v-card-subtitle>サブスク管理を使えば何を使っているかが一覧表で見れるのでサブスクの管理がすごく楽になります。</v-card-subtitle>
-                    </div>
-                </v-card>
-            </v-col>
-            <v-col cols=12 md=6 lg=4>
-                <v-card class="card ma-2" color="rgb(2, 62, 112)" dark>
-                    <v-img height="300px" src="@/assets/image/subsc-img2.png" />
-
-                    <div class="card__body">
-
-                        <v-card-title class="card__body-title headline">
-                            2,いくら使っているのか分からない
-                        </v-card-title>
-                        <v-card-subtitle>こういった悩みもサブスク管理を使用すればサブスク１つ１つの金額を把握でき、尚且つ月間・年間でサブスクにいくらかかっているのかなども算出することができます。</v-card-subtitle>
-                    </div>
-                </v-card>
-            </v-col>
-            <v-col cols=12 md=6 lg=4>
-                <v-card class="card ma-2" color="rgb(2, 62, 112)" dark>
-                    <v-img height="300px" src="@/assets/image/subsc-img3.png" />
-
-                    <div class="card__body">
-                        <v-card-title class="card__body-title headline">
-                            3,解約したいのに支払日が過ぎてしまった。
-                        </v-card-title>
-                        <v-card-subtitle>サブスクでよくあるのが今月までで解約したかったのに支払日が１日過ぎてしまっていて次月のサブスク課金が始まってしまった。このような悩みもサブスク管理はプッシュ通知でお知らせできるので解約漏れを防ぐことができます。</v-card-subtitle>
+                        <v-card-subtitle>{{ card.subTitle }}</v-card-subtitle>
                     </div>
                 </v-card>
             </v-col>
@@ -66,6 +41,26 @@ import {
     mapActions
 } from 'vuex'
 export default {
+    data() {
+        return {
+            cards: [{
+                    img: '/image/subsc-img1.png',
+                    title: '1,サブスク管理ができない',
+                    subTitle: 'サブスク管理を使えば何を使っているかが一覧表で見れるのでサブスクの管理がすごく楽になります。'
+                },
+                {
+                    img: '/image/subsc-img2.png',
+                    title: '2,いくら使っているのか分からない',
+                    subTitle: 'こういった悩みもサブスク管理を使用すればサブスク１つ１つの金額を把握でき、尚且つ月間・年間でサブスクにいくらかかっているのかなども算出することができます。'
+                },
+                {
+                    img: '/image/subsc-img3.png',
+                    title: '3,解約したいのに支払日が過ぎてしまった。',
+                    subTitle: 'サブスクでよくあるのが今月までで解約したかったのに支払日が１日過ぎてしまっていて次月のサブスク課金が始まってしまった。このような悩みもサブスク管理はプッシュ通知でお知らせできるので解約漏れを防ぐことができます。'
+                },
+            ]
+        }
+    },
     methods: {
         ...mapActions(['login'])
     }
