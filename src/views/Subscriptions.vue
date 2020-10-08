@@ -7,6 +7,10 @@
         <div class="subscriptions__loading" v-show="loading">
             <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
         </div>
+        <div class="subscriptions__default" v-if="subscriptions && !loading">
+            <p class="subscriptions__default-text" v-show="subscriptions.length === 0">サブスクが登録されていません。</p>
+        </div>
+
         <div class="subscriptions__container" v-show="!loading">
             <v-expansion-panels class="subscriptions__list">
                 <v-expansion-panel v-for="subscription in subscriptions" :key="subscription.id">
@@ -53,7 +57,7 @@
                 </v-expansion-panel>
             </v-expansion-panels>
 
-            <v-card class="subscriptions__sum-fees">
+            <v-card class="subscriptions__sum-fees" v-show="!loading">
                 <v-list-item class="grow">
                     <v-list-item-avatar color="grey darken-3">
                         <v-img class="elevation-6" v-if="photoURL" :src="photoURL" />
@@ -65,7 +69,9 @@
                 </v-list-item>
                 <v-list-item three-line>
                     <v-list-item-content>
-                        <v-card-text class="subscriptions__length" v-if="subscriptions">現在{{ subscriptions.length }}個のサブスクに登録しています。</v-card-text>
+                        <v-card-text class="subscriptions__length" v-show="subscriptions.length !== 0">現在{{ subscriptions.length }}個のサブスクに登録しています。</v-card-text>
+                        <v-card-text class=" subscriptions__default-text" v-show="subscriptions.length === 0">サブスクが登録されていません。</v-card-text>
+
                         <v-card-text class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</v-card-text>
                         <v-card-text class="subscriptions__sum-fee">年額/合計: <span>¥{{ year | addComma }}</span>円</v-card-text>
                     </v-list-item-content>
@@ -99,43 +105,6 @@ export default {
     data() {
         return {
             loading: true,
-            headers: [{
-                    text: 'サブスク名',
-                    value: 'name'
-                },
-                {
-                    text: '概要',
-                    value: 'description'
-                },
-                {
-                    text: 'メモ',
-                    value: 'memo'
-                },
-                {
-                    text: '月',
-                    value: 'month',
-                },
-                {
-                    text: '日',
-                    value: 'day'
-                },
-                {
-                    text: '種類',
-                    value: 'type'
-                },
-                {
-                    text: '料金',
-                    value: 'fee'
-                },
-                // {
-                //     text: 'URL',
-                //     value: 'url'
-                // },
-                // {
-                //     text: '操作',
-                //     sortable: false
-                // }
-            ],
             subscriptions: [],
             fees: [],
             sumSubscription: ''
@@ -184,6 +153,7 @@ export default {
     margin: 16px auto;
     padding: 0 8px;
     max-width: 1200px;
+    position: relative;
 
     &__container {
         @include pclarge {
@@ -191,6 +161,22 @@ export default {
             justify-content: space-between;
             align-items: flex-start;
             width: 100%;
+        }
+    }
+
+    &__default {
+        font-size: 16px;
+        font-weight: 600;
+        color: rgba(0, 0, 0, .6);
+        margin: 40px auto 80px;
+
+        @include pc {
+            font-size: 24px;
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            -webkit-transform: translateY(-50%) translateX(-50%);
         }
     }
 
