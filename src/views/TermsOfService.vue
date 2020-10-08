@@ -1,6 +1,6 @@
 <template>
 <div class="terms">
-    <h1 class="hdg">利用規約</h1>
+    <Title :title="'利用規約'" />
     <ul>
         <li>
             本規約は、◯◯株式会社（以下、「◯◯」といいます）が提供するインターネット上のサイト「サブスク管理」または関連するアプリケーションもしくはメールサービス等の求職・求人情報提供サービス（以下、総称して「サブスク管理」といいます）を利用する際に適用されます。ご利用の前に本規約の内容をよくお読みください。
@@ -261,6 +261,16 @@
     </ul>
 </div>
 </template>
+
+<script>
+import Title from "@/components/Title";
+export default {
+    components: {
+        Title
+    },
+
+}
+</script>
 
 <style lang="scss" scoped>
 .terms {

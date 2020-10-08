@@ -1,6 +1,6 @@
 <template>
 <div class="privacy">
-    <h1 class="hdg">プライバシーポリシー</h1>
+    <Title :title="'プライバシーポリシー'" />
     <ul>
         <li>
             株式会社
@@ -62,6 +62,16 @@
     </ul>
 </div>
 </template>
+
+<script>
+import Title from "@/components/Title";
+export default {
+    components: {
+        Title
+    },
+
+}
+</script>
 
 <style lang="scss" scoped>
 .privacy {
