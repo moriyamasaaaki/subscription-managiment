@@ -1,5 +1,5 @@
 <template>
-<v-container class="subscriptions" text-xs-center justify-center>
+<div class="subscriptions" text-xs-center justify-center>
     <v-layout row wrap>
         <Title :title="'登録サブスク'" />
         <div class="subscriptions__loading" v-show="loading">
@@ -19,6 +19,33 @@
                 <circle cx="433.63626" cy="105.17383" r="12.18187" fill="#fff" />
             </svg>
             <p class="subscriptions__default-text" v-show="subscriptions.length === 0">サブスクが登録されていません。</p>
+        </div>
+
+        <div class="subscriptions__sum-fees-mobile text-center" v-show="!loading">
+            <v-btn class="sum-btn" color="blue-grey" dark @click="sheet = !sheet">
+                合計金額を見る
+            </v-btn>
+            <v-bottom-sheet class="subscriptions__sum-fees-mobile-sheet" v-model="sheet">
+                <v-sheet class="text-center" height="300px">
+                    <v-btn class="mt-6" text color="red" @click="sheet = !sheet">
+                        閉じる
+                    </v-btn>
+                    <div class="py-3">
+                        <v-list-item class="grow mb-5">
+                            <v-list-item-avatar color="grey darken-3">
+                                <v-img class="elevation-6" v-if="photoURL" :src="photoURL" />
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title>{{ userName }}</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <p class="subscriptions__length mb-3" v-show="subscriptions.length !== 0">現在{{ subscriptions.length }}個のサブスクに登録しています。</p>
+                        <p class=" subscriptions__default-text mb-3" v-show="subscriptions.length === 0">サブスクが登録されていません。</p>
+                        <p class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</p>
+                        <p class="subscriptions__sum-fee">年額/合計: <span>¥{{ year | addComma }}</span>円</p>
+                    </div>
+                </v-sheet>
+            </v-bottom-sheet>
         </div>
 
         <div class="subscriptions__container" v-show="!loading">
@@ -55,12 +82,40 @@
                                 </v-btn>
                             </a>
                             <div class="subscriptions__footer-buttons">
-                                <v-btn class="ma-1" :to="{ name: 'subscription_edit', params: { subscription_id: subscription.id }}" outlined small fab color="indigo">
-                                    <v-icon>mdi-pencil</v-icon>
-                                </v-btn>
-                                <v-btn class="ma-1" @click="deleteConfirm(subscription.id)" outlined small fab color="error">
-                                    <v-icon>mdi-delete</v-icon>
-                                </v-btn>
+                                <v-row justify="center">
+                                    <v-btn class="ma-1" :to="{ name: 'subscription_edit', params: { subscription_id: subscription.id }}" outlined small fab color="indigo">
+                                        <v-icon>mdi-pencil</v-icon>
+                                    </v-btn>
+
+                                    <v-btn class="ma-1" outlined small fab color="error" @click.stop="dialog = true">
+                                        <v-icon>mdi-delete</v-icon>
+                                    </v-btn>
+
+                                    <v-dialog v-model="dialog" max-width="300">
+                                        <v-card>
+                                            <v-card-title class="headline">
+                                                {{ subscription.name }}を削除しますか？
+                                            </v-card-title>
+
+                                            <v-card-text>
+                                                削除すると元に戻すことはできません。本当に削除しますか？
+                                            </v-card-text>
+
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+
+                                                <v-btn color="blue darken-1" text @click="dialog = false">
+                                                    キャンセル
+                                                </v-btn>
+
+                                                <v-btn color="blue darken-1" text @click="deleteSubscriptionId(subscription.id)">
+                                                    削除
+                                                </v-btn>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                </v-row>
+
                             </div>
                         </div>
                     </v-expansion-panel-content>
@@ -94,7 +149,7 @@
             </v-icon>
         </v-btn>
     </v-layout>
-</v-container>
+</div>
 </template>
 
 <script>
@@ -118,6 +173,8 @@ export default {
     },
     data() {
         return {
+            dialog: false,
+            sheet: false,
             loading: true,
             subscriptions: [],
             fees: [],
@@ -145,12 +202,11 @@ export default {
                 console.log(this.fees);
             })
         },
-        deleteConfirm(id) {
-            if (confirm('削除してよろしいですか？')) {
-                this.deleteSubscription({
-                    id
-                })
-            }
+        deleteSubscriptionId(id) {
+            this.deleteSubscription({
+                id
+            })
+            this.dialog = false
         },
         ...mapActions(['deleteSubscription'])
     },
@@ -165,7 +221,7 @@ export default {
 <style lang="scss" scoped>
 .subscriptions {
     margin: 16px auto;
-    padding: 0 8px;
+    padding: 0 16px;
     max-width: 1200px;
     position: relative;
 
@@ -226,15 +282,35 @@ export default {
     }
 
     &__sum-fees {
-        @include pclarge {
+        display: none;
+
+        @include pc {
+            display: block;
             width: 25%;
         }
+    }
+
+    &__sum-fees-mobile {
+        margin: 0 0 16px auto;
+
+        @include pc {
+            display: none;
+            margin: 0;
+        }
+    }
+
+    &__sum-fees-mobile-sheet {
+        z-index: 999;
     }
 
     &__sum-fee {
         border-bottom: 1px solid rgb(226, 224, 224);
         margin-bottom: 8px;
         font-size: 18px;
+    }
+
+    &__sum-fees-userName {
+        text-align: left;
     }
 
     &__header-right,
@@ -284,11 +360,16 @@ img {
 
 .btn {
     position: fixed;
-    bottom: 2%;
+    z-index: 998;
+    bottom: 3%;
     right: 2%;
 }
 
 span {
     color: orangered;
+}
+
+.v-list-item .v-list-item__title {
+    text-align: left;
 }
 </style>

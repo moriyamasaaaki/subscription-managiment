@@ -77,9 +77,15 @@ export default {
 .privacy {
     max-width: 1000px;
     margin: 40px auto;
+    line-height: 2;
+    padding: 0 8px;
 
     li {
-        font-size: 16px;
+        font-size: 14px;
+
+        @include pc {
+            font-size: 16px;
+        }
     }
 
     strong {

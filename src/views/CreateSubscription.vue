@@ -1,8 +1,7 @@
 <template>
-<v-container text-xs-center>
+<v-container class="subscription-form" text-xs-center>
+    <Title :title="'サブスク作成'" />
     <v-layout row wrap justify-center>
-        <Title :title="'サブスク作成'" />
-
         <v-flex xs12 mt-5>
             <v-card>
                 <v-card-text>
@@ -23,8 +22,8 @@
                                 <v-radio label="お試し期間" value="お試し期間"></v-radio>
                             </v-radio-group>
                         </v-container>
-                        <v-btn @click="$router.push({ name: 'subscriptions' })">キャンセル</v-btn>
-                        <v-btn color="info" :disabled="
+                        <v-btn class="subscription-form__btn" @click="$router.push({ name: 'subscriptions' })">キャンセル</v-btn>
+                        <v-btn class="subscription-form__btn" color="info" :disabled="
                             !subscription.name ||
                             !subscription.fee ||
                             !subscription.month ||
@@ -93,3 +92,14 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.subscription-form {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+
+    &__btn {
+        margin: 4px;
+    }
+}
+</style>

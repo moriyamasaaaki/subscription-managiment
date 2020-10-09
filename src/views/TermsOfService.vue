@@ -275,12 +275,9 @@ export default {
 <style lang="scss" scoped>
 .terms {
     max-width: 1000px;
-    margin: 16px auto;
+    margin: 40px auto;
+    line-height: 2;
     padding: 0 8px;
-
-    @include pc {
-        margin: 40px auto;
-    }
 
     li {
         font-size: 14px;
@@ -291,11 +288,7 @@ export default {
     }
 
     strong {
-        font-size: 16px;
-
-        @include pc {
-            font-size: 20px;
-        }
+        font-size: 20px;
     }
 }
 </style>
