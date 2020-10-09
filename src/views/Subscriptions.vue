@@ -39,7 +39,7 @@
                                 <v-list-item-title>{{ userName }}</v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
-                        <p class="subscriptions__length mb-3" v-show="subscriptions.length !== 0">現在{{ subscriptions.length }}個のサブスクに登録しています。</p>
+                        <p class="subscriptions__length mb-3" v-show="subscriptions.length !== 0">現在<span>{{ subscriptions.length }}</span>個のサブスクに登録しています。</p>
                         <p class=" subscriptions__default-text mb-3" v-show="subscriptions.length === 0">サブスクが登録されていません。</p>
                         <p class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</p>
                         <p class="subscriptions__sum-fee">年額/合計: <span>¥{{ year | addComma }}</span>円</p>
@@ -49,7 +49,7 @@
         </div>
         <transition name="subscription-list" tag="div">
             <div class="subscriptions__container" v-show="!loading">
-                <v-expansion-panels class="subscriptions__list">
+                <v-expansion-panels class="subscriptions__list" flat focusable>
                     <v-expansion-panel v-for="subscription in subscriptions" :key="subscription.id">
                         <v-expansion-panel-header>
                             <div class="subscriptions__header-left">
@@ -62,11 +62,11 @@
                                 <p class="subscriptions__header-fee" v-if="subscription.type === 'お試し期間'">{{ subscription.type }}/¥{{ subscription.fee | addComma}}円</p>
                                 <div class="subscriptions__header-payment" v-if="subscription.type === '年額'">
                                     <v-icon>mdi-credit-card-outline</v-icon>
-                                    <p>支払日:{{ subscription.month }}月{{ subscription.day }}日</p>
+                                    <p>{{ subscription.month }}月{{ subscription.day }}日支払</p>
                                 </div>
                                 <div class="subscriptions__header-payment" v-else>
                                     <v-icon>mdi-credit-card-outline</v-icon>
-                                    <p>支払日:毎月{{ subscription.day }}日</p>
+                                    <p>毎月{{ subscription.day }}日支払</p>
                                 </div>
                             </div>
                         </v-expansion-panel-header>
@@ -122,7 +122,7 @@
                     </v-expansion-panel>
                 </v-expansion-panels>
 
-                <v-card class="subscriptions__sum-fees" v-show="!loading">
+                <v-card class="subscriptions__sum-fees" v-show="!loading" flat rounded>
                     <v-list-item class="grow">
                         <v-list-item-avatar color="grey darken-3">
                             <v-img class="elevation-6" v-if="photoURL" :src="photoURL" />
@@ -134,7 +134,7 @@
                     </v-list-item>
                     <v-list-item three-line>
                         <v-list-item-content>
-                            <v-card-text class="subscriptions__length" v-show="subscriptions.length !== 0">現在{{ subscriptions.length }}個のサブスクに登録しています。</v-card-text>
+                            <v-card-text class="subscriptions__length" v-show="subscriptions.length !== 0">現在<span>{{ subscriptions.length }}</span>個のサブスクを登録中です。</v-card-text>
                             <v-card-text class=" subscriptions__default-text" v-show="subscriptions.length === 0">サブスクが登録されていません。</v-card-text>
 
                             <v-card-text class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</v-card-text>
@@ -300,6 +300,7 @@ export default {
         display: none;
 
         @include pc {
+            background-color: #f1f5f9;
             display: block;
             width: 25%;
         }
@@ -320,7 +321,7 @@ export default {
 
     &__sum-fee {
         border-bottom: 1px solid rgb(226, 224, 224);
-        margin-bottom: 8px;
+        margin-bottom: 16px;
         font-size: 18px;
     }
 
@@ -340,6 +341,12 @@ export default {
 
     &__header-right {
         width: 30%;
+
+        @include pc {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
     }
 
     &__header-payment {
@@ -363,7 +370,7 @@ export default {
     }
 
     &__length {
-        font-size: 13px;
+        font-size: 14px;
     }
 
 }
@@ -382,6 +389,7 @@ img {
 
 span {
     color: orangered;
+    font-weight: 600;
 }
 
 .v-list-item .v-list-item__title {

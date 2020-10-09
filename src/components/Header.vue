@@ -1,5 +1,5 @@
 <template>
-<v-app-bar app color="primary">
+<v-app-bar app color="white" flat>
     <v-app-bar-nav-icon @click.stop="toggleSideMenu" v-show="$store.state.login_user"></v-app-bar-nav-icon>
     <v-toolbar-title class="headline">
         <router-link to="/subscriptions">
@@ -7,7 +7,7 @@
         </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn class="pa-5" v-if="$store.state.login_user" @click="logout">Sign out</v-btn>
+    <v-btn class="pa-5" color="primary" v-if="$store.state.login_user" @click="logout">Sign out</v-btn>
 </v-app-bar>
 </template>
 
@@ -32,11 +32,13 @@ a {
 
 span {
     display: block;
-    color: white;
+    color: rgb(82, 82, 82);
+    font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
 
     @include pc {
-        font-size: 24px;
+        font-size: 32px;
     }
 }
 </style>
