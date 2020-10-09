@@ -85,11 +85,11 @@ export default {
         }
     }
 
-    &__top-login-button {
+    &__top-login-buttons {
         text-align: left;
 
         @include pc {
-            width: 40%;
+            width: 50%;
         }
     }
 

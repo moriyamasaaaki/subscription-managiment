@@ -144,11 +144,16 @@
                 </v-card>
             </div>
         </transition>
-        <v-btn class="mx-2 btn" fab dark color="indigo" to="/create/subscription">
-            <v-icon dark>
-                mdi-plus
-            </v-icon>
-        </v-btn>
+        <v-tooltip left>
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn class="mx-2 btn" fab dark color="indigo" to="/create/subscription" v-bind="attrs" v-on="on">
+                    <v-icon dark>
+                        mdi-plus
+                    </v-icon>
+                </v-btn>
+            </template>
+            <div>サブスクを追加する</div>
+        </v-tooltip>
     </v-layout>
 </div>
 </template>
