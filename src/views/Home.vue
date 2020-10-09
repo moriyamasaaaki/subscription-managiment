@@ -1,15 +1,15 @@
 <template>
-<v-container class="home" text-xs-center justify-center>
+<div class="home" text-xs-center justify-center>
     <v-layout row wrap>
         <h1>サブスク管理とは？</h1>
 
         <v-flex xs12>
             <div class="home__top">
                 <img src="@/assets/image/main.png" alt="">
-                <div class="home__top-login-button">
+                <div class="home__top-login-buttons">
                     <h2 class="home__top-login-title">サブスク管理を始める</h2>
                     <p class="home__top-login-subTitle">サブスク管理は「余計な課金」や「解約漏れ」防ぐためのサブスク管理サービスです。</p>
-                    <v-btn class="pa-6" color='white' @click="login">
+                    <v-btn class="home__top-login-button pa-6" color='white' @click="login">
                         <img class="home__top-login-google-icon" src="@/assets/image/google_icon.png" alt="">
                         Sign in with Google
                     </v-btn>
@@ -21,7 +21,7 @@
         <v-row>
             <v-col cols=12 md=6 lg=4 v-for="card in cards" :key="card.title">
                 <v-card class="card ma-2" color="rgb(2, 62, 112)" dark>
-                    <v-img height="300px" :src="card.img" />
+                    <img class="card__img" height="250px" :src="card.img" />
                     <div class="card__body">
 
                         <v-card-title class="card__body-title headline">
@@ -33,7 +33,7 @@
             </v-col>
         </v-row>
     </v-layout>
-</v-container>
+</div>
 </template>
 
 <script>
@@ -69,7 +69,13 @@ export default {
 
 <style lang="scss" scoped>
 .home {
+    padding: 0 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+
     &__top {
+        margin-bottom: 80px;
+
         @include pc {
             display: flex;
             justify-content: center;
@@ -90,6 +96,7 @@ export default {
     &__top-login-title {
         font-size: 18px;
         margin-bottom: 8px;
+        text-align: center;
 
         @include pc {
             font-size: 32px;
@@ -106,6 +113,11 @@ export default {
             margin-bottom: 24px;
         }
 
+    }
+
+    &__top-login-button {
+        margin: 0 auto;
+        text-align: center;
     }
 
     &__top-login-google-icon {
@@ -125,6 +137,10 @@ img {
 }
 
 .card {
+    &__img {
+        width: 100%;
+    }
+
     &__body {
         min-height: 250px;
     }
@@ -138,7 +154,7 @@ img {
 h1 {
     position: relative;
     margin: 64px 0 24px;
-    padding: 1.5rem 2rem;
+    padding: 16px;
     border-radius: 10px;
     background: #2c79ec;
     color: #fff;
@@ -147,7 +163,7 @@ h1 {
 h3 {
     position: relative;
     margin-bottom: 2em;
-    padding: 1.5rem 2rem;
+    padding: 16px;
     border-radius: 10px;
     background: #2c79ec;
     color: #fff;

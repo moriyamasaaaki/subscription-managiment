@@ -1,5 +1,5 @@
 <template>
-<v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
+<v-navigation-drawer v-model="$store.state.drawer" fixed temporary>
     <v-list class="pa-1">
         <v-list-item avatar>
             <v-list-item-avatar>
