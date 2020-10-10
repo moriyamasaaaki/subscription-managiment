@@ -70,17 +70,22 @@ export default {
             feeRules: [
                 v => !!v || '*料金は必須項目です。',
             ],
-            subscription: {}
+            subscription: {},
+            createdAt: new Date(),
+            updatedAt: new Date()
         }
     },
     methods: {
         submit() {
             if (this.$route.params.subscription_id) {
+                this.subscription.updatedAt = this.updatedAt
                 this.updateSubscription({
                     id: this.$route.params.subscription_id,
-                    subscription: this.subscription
+                    subscription: this.subscription,
                 })
             } else {
+                this.subscription.createdAt = this.createdAt
+                this.subscription.updatedAt = this.updatedAt
                 this.addSubscription(this.subscription)
             }
             this.$router.push({
