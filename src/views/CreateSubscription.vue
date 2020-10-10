@@ -29,7 +29,7 @@
                             !subscription.month ||
                             !subscription.day ||
                             !subscription.type 
-                        " @click="submit">作成</v-btn>
+                        " @click="submit">{{ submitText }}</v-btn>
                     </v-form>
                 </v-card-text>
             </v-card>
@@ -52,6 +52,7 @@ export default {
 
         const subscription = this.$store.getters.getSubscriptionById(this.$route.params.subscription_id)
         if (subscription) {
+            this.submitText = '更新'
             this.subscription = subscription
         } else {
             this.$router.push({
@@ -70,17 +71,23 @@ export default {
             feeRules: [
                 v => !!v || '*料金は必須項目です。',
             ],
-            subscription: {}
+            subscription: {},
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            submitText: '作成'
         }
     },
     methods: {
         submit() {
             if (this.$route.params.subscription_id) {
+                this.subscription.updatedAt = this.updatedAt
                 this.updateSubscription({
                     id: this.$route.params.subscription_id,
-                    subscription: this.subscription
+                    subscription: this.subscription,
                 })
             } else {
+                this.subscription.createdAt = this.createdAt
+                this.subscription.updatedAt = this.updatedAt
                 this.addSubscription(this.subscription)
             }
             this.$router.push({
