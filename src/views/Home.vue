@@ -17,7 +17,7 @@
     </v-flex>
     <h3>サブスク管理大変...</h3>
 
-    <v-row>
+    <v-row class="card-list">
         <v-col cols=12 md=6 lg=4 v-for="card in cards" :key="card.title">
             <v-card class="card ma-2" color="#f1f5f9">
                 <img class="card__img" height="250px" :src="card.img" />
@@ -138,7 +138,13 @@ img {
     }
 }
 
+.card-list {
+    margin-bottom: 40px;
+}
+
 .card {
+    padding: 0;
+
     &__img {
         width: 100%;
     }
@@ -220,5 +226,11 @@ h3:after {
     bottom: -30px;
     width: 15px;
     height: 15px;
+}
+
+.col-md-6,
+.col-lg-4,
+.col-12 {
+    padding: 0;
 }
 </style>
