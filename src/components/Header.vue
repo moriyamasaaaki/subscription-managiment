@@ -1,13 +1,13 @@
 <template>
 <v-app-bar app color="white" flat>
-    <v-app-bar-nav-icon @click.stop="toggleSideMenu" v-show="$store.state.login_user"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click.stop="toggleSideMenu"></v-app-bar-nav-icon>
     <v-toolbar-title class="headline">
         <router-link to="/subscriptions">
             <span>Subscment</span>
         </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn class="pa-5" color="primary" v-if="$store.state.login_user" @click="logout">Sign out</v-btn>
+    <v-btn class="header__button" color="primary" v-if="$store.state.login_user" @click="logout">Sign out</v-btn>
 </v-app-bar>
 </template>
 
@@ -25,6 +25,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header {
+    &__button {
+        padding: 8px 16px;
+    }
+}
+
 a {
     text-decoration: none;
     color: black;

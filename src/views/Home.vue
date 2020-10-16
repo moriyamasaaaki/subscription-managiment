@@ -1,38 +1,36 @@
 <template>
-<div class="home" text-xs-center justify-center>
-    <v-layout row wrap>
-        <h1>サブスク管理とは？</h1>
+<div class="home">
+    <h1>サブスク管理とは？</h1>
 
-        <v-flex xs12>
-            <div class="home__top">
-                <img src="@/assets/image/main.png" alt="">
-                <div class="home__top-login-buttons">
-                    <h2 class="home__top-login-title">サブスク管理を始める</h2>
-                    <p class="home__top-login-subTitle">サブスク管理は「余計な課金」や「解約漏れ」防ぐためのサブスク管理サービスです。</p>
-                    <v-btn class="home__top-login-button pa-6" color='white' @click="login">
-                        <img class="home__top-login-google-icon" src="@/assets/image/google_icon.png" alt="">
-                        Sign in with Google
-                    </v-btn>
-                </div>
+    <v-flex xs12>
+        <div class="home__top">
+            <img src="@/assets/image/main.png" alt="">
+            <div class="home__top-login-buttons">
+                <h2 class="home__top-login-title">サブスク管理を始める</h2>
+                <p class="home__top-login-subTitle">サブスク管理は「余計な課金」や「解約漏れ」防ぐためのサブスク管理サービスです。</p>
+                <v-btn class="home__top-login-button" color='white' @click="login">
+                    <img class="home__top-login-google-icon" src="@/assets/image/google_icon.png" alt="">
+                    Sign in with Google
+                </v-btn>
             </div>
-        </v-flex>
-        <h3>サブスク管理大変...</h3>
+        </div>
+    </v-flex>
+    <h3>サブスク管理大変...</h3>
 
-        <v-row>
-            <v-col cols=12 md=6 lg=4 v-for="card in cards" :key="card.title">
-                <v-card class="card ma-2" color="rgb(2, 62, 112)" dark>
-                    <img class="card__img" height="250px" :src="card.img" />
-                    <div class="card__body">
+    <v-row>
+        <v-col cols=12 md=6 lg=4 v-for="card in cards" :key="card.title">
+            <v-card class="card ma-2" color="#f1f5f9">
+                <img class="card__img" height="250px" :src="card.img" />
+                <div class="card__body">
 
-                        <v-card-title class="card__body-title headline">
-                            {{ card.title }}
-                        </v-card-title>
-                        <v-card-subtitle>{{ card.subTitle }}</v-card-subtitle>
-                    </div>
-                </v-card>
-            </v-col>
-        </v-row>
-    </v-layout>
+                    <v-card-title class="card__body-title headline">
+                        {{ card.title }}
+                    </v-card-title>
+                    <v-card-subtitle>{{ card.subTitle }}</v-card-subtitle>
+                </div>
+            </v-card>
+        </v-col>
+    </v-row>
 </div>
 </template>
 
@@ -72,6 +70,7 @@ export default {
     padding: 0 16px;
     max-width: 1200px;
     margin: 0 auto;
+    box-sizing: border-box;
 
     &__top {
         margin-bottom: 80px;
@@ -116,8 +115,11 @@ export default {
     }
 
     &__top-login-button {
-        margin: 0 auto;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+
     }
 
     &__top-login-google-icon {
@@ -162,7 +164,7 @@ h1 {
 
 h3 {
     position: relative;
-    margin-bottom: 2em;
+    margin-bottom: 24px;
     padding: 16px;
     border-radius: 10px;
     background: #2c79ec;
@@ -172,6 +174,7 @@ h3 {
 
 h1,
 h3 {
+    max-width: 230px;
     font-size: 18px;
     margin-bottom: 24px;
 
