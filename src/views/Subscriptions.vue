@@ -53,7 +53,7 @@
                     <v-expansion-panel v-for="subscription in subscriptions" :key="subscription.id">
                         <v-expansion-panel-header>
                             <div class="subscriptions__header-left">
-                                <img v-if="subscription.url" :src="'http://www.google.com/s2/favicons?domain=' + subscription.url" width="30" height="30" alt="" />
+                                <img v-if="subscription.url" :src="subscription.url + '/favicon.ico'" width="30" height="30" alt="" />
                                 <img v-else src="http://www.google.com/s2/favicons?domain=https://masa-portfolio.netlify.app/" width="30" height="30" alt="" />
                                 <strong>{{ subscription.name }}</strong>
                             </div>
@@ -138,7 +138,7 @@
                             <v-card-text class=" subscriptions__default-text" v-show="subscriptions.length === 0">サブスクが登録されていません。</v-card-text>
 
                             <v-card-text class="subscriptions__sum-fee">月額/合計: <span>¥{{ sum | addComma }}</span>円</v-card-text>
-                            <v-card-text class="subscriptions__sum-fee">年額/合計: <span>¥{{ year | addComma }}</span>円</v-card-text>
+                            <v-card-text class="subscriptions__sum-fee">年額/合計: <span>¥{{ year + yearly | addComma}}</span>円</v-card-text>
                         </v-list-item-content>
                     </v-list-item>
                 </v-card>
@@ -183,36 +183,64 @@ export default {
             sheet: false,
             loading: true,
             subscriptions: [],
-            fees: [],
-            sumSubscription: ''
+            sumMonthly: [],
+            sumSubscription: '',
+            sumYearly: [],
         }
     },
     computed: {
-        sum: function () {
-            this.subscriptionsFee();
-            return this.fees.reduce(function (prev, current) {
-                return prev + current;
-            }, 0)
+        sum() {
+            return this.totalSum();
         },
-        year: function () {
-            return this.fees.reduce(function (prev, current) {
-                return prev + current * 12;
-            }, 0)
+        year() {
+            return this.totalYear();
+        },
+        yearly() {
+            return this.totalSubscriptionTypeYear();
         },
         ...mapGetters(['userName', 'photoURL'])
     },
     methods: {
-        subscriptionsFee() {
+        subscriptionsMonthly() {
             this.subscriptions.map(subscription => {
-                this.fees.push(subscription.fee);
-                console.log(this.fees);
+                if (subscription.type === '月額') {
+                    this.sumMonthly.push(subscription.fee);
+                    console.log(this.sumMonthly);
+                }
+            })
+        },
+        subscriptionsYearly() {
+            this.subscriptions.map(subscription => {
+                if (subscription.type === '年額') {
+                    this.sumYearly.push(subscription.fee);
+                    console.log(this.sumYearly);
+                }
             })
         },
         deleteSubscriptionId(id) {
             this.deleteSubscription({
                 id
             })
-            this.dialog = false
+            this.sumMonthly.length = 0;
+            this.sumYearly.length = 0;
+            this.dialog = false;
+        },
+        totalSum() {
+            this.subscriptionsMonthly();
+            return this.sumMonthly.reduce(function (prev, current) {
+                return prev + current;
+            }, 0)
+        },
+        totalYear() {
+            return this.sumMonthly.reduce(function (prev, current) {
+                return prev + current * 12;
+            }, 0)
+        },
+        totalSubscriptionTypeYear() {
+            this.subscriptionsYearly();
+            return this.sumYearly.reduce(function (prev, current) {
+                return prev + current;
+            }, 0)
         },
         ...mapActions(['deleteSubscription'])
     },
