@@ -71,6 +71,7 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
+    font-family: "Hiragino Kaku Gothic ProN", sans-serif;
 
     &__top {
         margin-bottom: 80px;
@@ -94,6 +95,8 @@ export default {
 
     &__top-login-title {
         font-size: 18px;
+        font-weight: 600;
+        color: #2f3233;
         margin-bottom: 8px;
         text-align: center;
 
@@ -105,6 +108,8 @@ export default {
 
     &__top-login-subTitle {
         font-size: 13px;
+        font-weight: 300;
+        color: #5e5e5e;
         margin-bottom: 8px;
 
         @include pc {

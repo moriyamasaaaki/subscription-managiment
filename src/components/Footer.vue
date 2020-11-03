@@ -1,6 +1,6 @@
 <template>
 <footer class="footer">
-    <small class="footer__copyright">© subscment</small>
+    <small class="footer__copyright">© {{ new Date().getFullYear() }} Subscment</small>
 </footer>
 </template>
 
