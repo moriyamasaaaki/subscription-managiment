@@ -123,7 +123,7 @@
                 </v-expansion-panels>
 
                 <v-card class="subscriptions__sum-fees" v-show="!loading" flat rounded>
-                    <v-list-item class="grow">
+                    <v-list-item class="grow" v-if="$store.state.login_user">
                         <v-list-item-avatar color="grey darken-3">
                             <v-img class="elevation-6" v-if="photoURL" :src="photoURL" />
                         </v-list-item-avatar>
@@ -144,7 +144,7 @@
                 </v-card>
             </div>
         </transition>
-        <v-tooltip left>
+        <v-tooltip left v-if="$store.state.login_user">
             <template v-slot:activator="{ on, attrs }">
                 <v-btn class="mx-2 btn" fab dark color="indigo" to="/create/subscription" v-bind="attrs" v-on="on">
                     <v-icon dark>
