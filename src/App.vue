@@ -43,7 +43,34 @@ export default {
         })
     },
 
+    mounted: function () {
+        var routeInstance = this.$route;
+        this.createTitleDesc(routeInstance);
+    },
+    watch: {
+        '$route'(routeInstance) {
+            this.createTitleDesc(routeInstance);
+        }
+    },
+
     methods: {
+        createTitleDesc: function (routeInstance) {
+            // タイトルを設定
+            if (routeInstance.meta.title) {
+                var setTitle = routeInstance.meta.title + ' | Subscment';
+                document.title = setTitle;
+            } else {
+                document.title = 'title is not set'
+            }
+
+            // メタタグdescription設定
+            if (routeInstance.meta.desc) {
+                var setDesc = routeInstance.meta.desc + ' | Subscment';
+                document.querySelector("meta[name='description']").setAttribute('content', setDesc)
+            } else {
+                document.querySelector("meta[name='description']").setAttribute('content', 'description is not set')
+            }
+        },
         ...mapActions(['setLoginUser', 'deleteLoginUser', 'fetchSubscriptions'])
     }
 };
