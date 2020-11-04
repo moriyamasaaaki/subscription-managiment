@@ -15,6 +15,7 @@
             </div>
         </div>
     </v-flex>
+
     <h3>サブスク管理大変...</h3>
 
     <v-row class="card-list">

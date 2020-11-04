@@ -9,6 +9,7 @@ export default new Vuex.Store({
     login_user: null,
     drawer: false,
     subscriptions: [],
+    snackbar: false,
   },
   mutations: {
     setLoginUser(state, user) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     toggleSideMenu(state) {
       state.drawer = !state.drawer;
+    },
+    setSnackbar(state, bool) {
+      state.snackbar = bool;
     },
     addSubscription(state, { id, subscription }) {
       subscription.id = id;
@@ -57,10 +61,11 @@ export default new Vuex.Store({
     },
     login() {
       const google_auth_provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(google_auth_provider);
+      firebase.auth().signInWithRedirect(google_auth_provider)
     },
-    logout() {
+    logout({ commit }) {
       firebase.auth().signOut();
+      commit("setSnackbar", true);
     },
     deleteLoginUser({ commit }) {
       commit("deleteLoginUser");
