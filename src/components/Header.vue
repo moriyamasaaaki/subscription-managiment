@@ -8,6 +8,16 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn class="header__button" color="primary" v-if="$store.state.login_user" @click="logout">Sign out</v-btn>
+    <v-snackbar v-model="$store.state.snackbar" timeout="2000" bottom>
+        ログアウトしました！！
+
+        <template v-slot:action="{ attrs }">
+            <v-btn color="blue" text v-bind="attrs" @click="$store.state.snackbar = false">
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
+
 </v-app-bar>
 </template>
 
@@ -17,6 +27,7 @@ import {
 } from 'vuex';
 
 export default {
+
     methods: {
         ...mapActions(['toggleSideMenu', 'logout'])
     }

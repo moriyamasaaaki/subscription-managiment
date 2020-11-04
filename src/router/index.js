@@ -17,12 +17,6 @@ const routes = [
       import("../views/About.vue"),
   },
   {
-    path: "/myList",
-    name: "MyList",
-    component: () =>
-      import("../views/MyList.vue"),
-  },
-  {
     path: "/create/subscription",
     name: "CreateSubscription",
     component: () =>

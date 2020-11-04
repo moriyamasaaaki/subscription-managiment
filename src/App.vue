@@ -2,16 +2,6 @@
 <v-app>
     <Header />
     <SideMenu />
-    <v-snackbar v-model="snackbar" :timeout="timeout" top right color="success">
-        ログアウトしました！！
-
-        <template v-slot:action="{ attrs }">
-            <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
-                Close
-            </v-btn>
-        </template>
-    </v-snackbar>
-
     <v-content>
         <router-view />
     </v-content>
@@ -45,20 +35,12 @@ export default {
                 })
             } else {
                 this.deleteLoginUser().then(() => {
-                    this.snackbar = true
                     this.$router.push({
                         name: 'Home'
                     })
                 })
             }
         })
-    },
-
-    data() {
-        return {
-            snackbar: false,
-            timeout: 2000,
-        }
     },
 
     methods: {

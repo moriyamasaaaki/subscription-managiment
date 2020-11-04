@@ -274,11 +274,12 @@ export default {
     position: relative;
 
     &__container {
-        @include pclarge {
+        width: 100%;
+
+        @include pc {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            width: 100%;
         }
     }
 
@@ -303,7 +304,8 @@ export default {
     }
 
     &__list {
-        @include pclarge {
+
+        @include pc {
             width: 70%;
         }
     }
