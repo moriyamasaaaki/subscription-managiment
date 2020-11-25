@@ -53,7 +53,7 @@
                     <v-expansion-panel v-for="subscription in subscriptions" :key="subscription.id">
                         <v-expansion-panel-header>
                             <div class="subscriptions__header-left">
-                                <img v-if="subscription.url" :src="subscription.url + '/favicon.ico'" width="30" height="30" alt="" />
+                                <img v-if="subscription.url" :src="subscription.url.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)[0] + 'favicon.ico'" width="30" height="30" alt="" onerror="this.src='https://1.bp.blogspot.com/-lGOEBC53sNk/WvQHXNpNfiI/AAAAAAABL6I/EF8b66sqJicObf9JkISl-cuvfc5m4EUrACLcBGAs/s800/internet_404_page_not_found_j.png'; this.removeAttribute('onerror')" />
                                 <img v-else src="http://www.google.com/s2/favicons?domain=https://masa-portfolio.netlify.app/" width="30" height="30" alt="" />
                                 <strong>{{ subscription.name }}</strong>
                             </div>
