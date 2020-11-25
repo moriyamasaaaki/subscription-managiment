@@ -154,6 +154,10 @@
             </template>
             <div>サブスクを追加する</div>
         </v-tooltip>
+        <v-snackbar v-model="snackbar" timeout="1500" bottom>
+        ログインしてください。
+    </v-snackbar>
+
     </v-layout>
 </div>
 </template>
@@ -172,10 +176,18 @@ export default {
         Title
     },
     created() {
-        setTimeout(() => {
-            this.loading = false;
-            this.subscriptions = this.$store.state.subscriptions;
-        }, 1500)
+        const user = this.$store.state.login_user;
+        if(user) {
+            setTimeout(() => {
+                this.loading = false;
+                this.subscriptions = this.$store.state.subscriptions;
+            }, 1500)
+        } else {
+            this.snackbar = true;
+            setTimeout(() => {
+                this.$router.push('/');
+            }, 1500)
+        }
     },
     data() {
         return {
@@ -186,6 +198,7 @@ export default {
             sumMonthly: [],
             sumSubscription: '',
             sumYearly: [],
+            snackbar: false,
         }
     },
     computed: {
